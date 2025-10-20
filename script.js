@@ -427,12 +427,14 @@ function toggleMobileMenu() {
 function openMobileMenu() {
     elements.sidebar.classList.add('open');
     elements.mobileMenuToggle.classList.add('active');
+    elements.mobileMenuToggle.setAttribute('aria-expanded', 'true');
     state.isMobileMenuOpen = true;
 }
 
 function closeMobileMenu() {
     elements.sidebar.classList.remove('open');
     elements.mobileMenuToggle.classList.remove('active');
+    elements.mobileMenuToggle.setAttribute('aria-expanded', 'false');
     state.isMobileMenuOpen = false;
 }
 
@@ -586,8 +588,7 @@ function executeSearchResult(element) {
 
 // Contact links
 function initializeContactLinks() {
-    const contactLinks = document.querySelectorAll('.contact-link');
-    contactLinks.forEach(link => {
+    elements.contactLinks.forEach(link => {
         link.addEventListener('click', function() {
             const text = this.dataset.copy;
             copyToClipboard(text);
@@ -597,6 +598,15 @@ function initializeContactLinks() {
 
 function copyToClipboard(text) {
     navigator.clipboard.writeText(text).then(() => {
+        showToast('Copied!');
+    }).catch(() => {
+        // Fallback for older browsers
+        const textArea = document.createElement('textarea');
+        textArea.value = text;
+        document.body.appendChild(textArea);
+        textArea.select();
+        document.execCommand('copy');
+        document.body.removeChild(textArea);
         showToast('Copied!');
     });
 }
@@ -609,6 +619,79 @@ function showToast(message) {
     setTimeout(() => {
         toast.classList.remove('show');
     }, 2000);
+}
+
+// Download Resume Function
+function downloadResume() {
+    // Create a simple PDF-like resume content
+    const resumeContent = `
+Alex Chen - Cybersecurity & IT Professional
+==========================================
+
+EXPERIENCE
+----------
+
+Senior Cybersecurity Analyst
+TechCorp Security | 2022 - Present
+• Reduced incident response time by 40% through automated threat detection
+• Implemented SIEM solution covering 500+ endpoints across 3 data centers
+• Led security awareness training for 200+ employees, reducing phishing click rates by 60%
+
+Network Security Engineer
+SecureNet Solutions | 2021 - 2022
+• Deployed firewall rules reducing attack surface by 35%
+• Configured VPN infrastructure supporting 150+ remote workers
+• Conducted vulnerability assessments identifying 200+ security gaps
+
+IT Support Specialist
+StartupXYZ | 2020 - 2021
+• Managed Active Directory for 50+ users across multiple domains
+• Implemented backup solutions achieving 99.9% uptime
+• Developed PowerShell scripts automating 80% of routine tasks
+
+EDUCATION
+---------
+
+Bachelor of Science in Computer Science
+University of Technology | 2016 - 2020
+
+CERTIFICATIONS
+--------------
+
+• Security+ (CompTIA) - 2023
+• CySA+ (CompTIA) - 2023
+• CCNA (Cisco) - 2022
+• CEH (EC-Council) - 2022
+• AWS Security (Amazon) - 2024
+
+SKILLS
+------
+
+Networking: TCP/IP, Firewalls, VPN
+Security Tools: Nmap, Wireshark, Burp Suite
+Scripting: Python, Bash, PowerShell
+Cloud & OS: AWS, Linux, Windows Server
+
+CONTACT
+-------
+
+Email: alex.chen@email.com
+GitHub: github.com/alexchen
+LinkedIn: linkedin.com/in/alexchen
+    `;
+    
+    // Create and download the file
+    const blob = new Blob([resumeContent], { type: 'text/plain' });
+    const url = window.URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'Alex_Chen_Resume.txt';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    window.URL.revokeObjectURL(url);
+    
+    showToast('Resume downloaded!');
 }
 
 // Keyboard shortcuts
@@ -654,6 +737,9 @@ function showProjectDetail(projectId) {
     portfolioGrid.style.display = 'none';
     portfolioDetail.style.display = 'block';
     
+    // Focus management and ESC to close
+    document.addEventListener('keydown', escClosePortfolio, { once: true });
+    
     portfolioDetailContent.innerHTML = `
         <h2>${project.title}</h2>
         <p><strong>Role:</strong> ${project.role}</p>
@@ -696,6 +782,15 @@ function showPortfolioGrid() {
     
     portfolioGrid.style.display = 'grid';
     portfolioDetail.style.display = 'none';
+    
+    // Restore focus to portfolio section
+    document.querySelector('[data-section="portfolio"]').focus?.();
+}
+
+function escClosePortfolio(e) {
+    if (e.key === 'Escape') {
+        showPortfolioGrid();
+    }
 }
 
 // Blog management
@@ -726,6 +821,9 @@ function showBlogArticle(slug) {
     blogList.style.display = 'none';
     blogArticle.style.display = 'block';
     
+    // Focus management and ESC to close
+    document.addEventListener('keydown', escCloseBlog, { once: true });
+    
     blogArticleContent.innerHTML = `
         <div class="article-header">
             <h1 class="article-title">${post.title}</h1>
@@ -748,6 +846,15 @@ function showBlogList() {
     
     blogList.style.display = 'grid';
     blogArticle.style.display = 'none';
+    
+    // Restore focus to blog section
+    document.querySelector('[data-section="blog"]').focus?.();
+}
+
+function escCloseBlog(e) {
+    if (e.key === 'Escape') {
+        showBlogList();
+    }
 }
 
 function renderArticleBody(body) {
