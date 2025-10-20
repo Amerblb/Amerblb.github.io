@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alex Chen - Cybersecurity & IT Professional</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <a href="#main" class="skip-link">Skip to main content</a>
+    
+    <div class="app">
+        <!-- Sidebar Navigation -->
+        <nav class="sidebar" role="navigation" aria-label="Main navigation">
+            <div class="sidebar-header">
+                <h1 class="site-title">Alex Chen</h1>
+                <p class="site-subtitle">Cybersecurity & IT</p>
+            </div>
+            
+            <ul class="nav-list" role="list">
+                <li><a href="#home" class="nav-link" data-section="home">Home</a></li>
+                <li><a href="#resume" class="nav-link" data-section="resume">Resume</a></li>
+                <li><a href="#portfolio" class="nav-link" data-section="portfolio">Portfolio</a></li>
+                <li><a href="#blog" class="nav-link" data-section="blog">Blog</a></li>
+                <li><a href="#skills" class="nav-link" data-section="skills">Skills & Certs</a></li>
+                <li><a href="#contact" class="nav-link" data-section="contact">Contact</a></li>
+            </ul>
+            
+            <div class="sidebar-footer">
+                <button class="theme-toggle" aria-label="Toggle dark mode">
+                    <svg class="theme-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="5"/>
+                        <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
+                    </svg>
+                </button>
+            </div>
+        </nav>
+
+        <!-- Mobile Menu Button -->
+        <button class="mobile-menu-toggle" aria-label="Toggle navigation menu">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="3" y1="6" x2="21" y2="6"/>
+                <line x1="3" y1="12" x2="21" y2="12"/>
+                <line x1="3" y1="18" x2="21" y2="18"/>
+            </svg>
+        </button>
+
+        <!-- Main Content -->
+        <main id="main" class="main-content">
+            <!-- Home Section -->
+            <section id="home" class="section active">
+                <div class="hero">
+                    <h2 class="hero-title">Cybersecurity & IT Professional</h2>
+                    <p class="hero-summary">
+                        Cybersecurity & IT professional focused on defensive architecture, network monitoring, 
+                        and ethical pentesting in isolated labs. Passionate about building resilient systems 
+                        and sharing knowledge through hands-on research and documentation.
+                    </p>
+                </div>
+                
+                <div class="metrics">
+                    <div class="metric-card">
+                        <div class="metric-number">24</div>
+                        <div class="metric-label">Security Labs</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-number">18</div>
+                        <div class="metric-label">Write-ups</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-number">5</div>
+                        <div class="metric-label">Certifications</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-number">3</div>
+                        <div class="metric-label">Years Experience</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Resume Section -->
+            <section id="resume" class="section">
+                <h2 class="section-title">Resume</h2>
+                
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-marker"></div>
+                        <div class="timeline-content">
+                            <h3>Senior Cybersecurity Analyst</h3>
+                            <p class="timeline-company">TechCorp Security</p>
+                            <p class="timeline-date">2022 - Present</p>
+                            <ul class="timeline-achievements">
+                                <li>Reduced incident response time by 40% through automated threat detection</li>
+                                <li>Implemented SIEM solution covering 500+ endpoints across 3 data centers</li>
+                                <li>Led security awareness training for 200+ employees, reducing phishing click rates by 60%</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-marker"></div>
+                        <div class="timeline-content">
+                            <h3>Network Security Engineer</h3>
+                            <p class="timeline-company">SecureNet Solutions</p>
+                            <p class="timeline-date">2021 - 2022</p>
+                            <ul class="timeline-achievements">
+                                <li>Deployed firewall rules reducing attack surface by 35%</li>
+                                <li>Configured VPN infrastructure supporting 150+ remote workers</li>
+                                <li>Conducted vulnerability assessments identifying 200+ security gaps</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-marker"></div>
+                        <div class="timeline-content">
+                            <h3>IT Support Specialist</h3>
+                            <p class="timeline-company">StartupXYZ</p>
+                            <p class="timeline-date">2020 - 2021</p>
+                            <ul class="timeline-achievements">
+                                <li>Managed Active Directory for 50+ users across multiple domains</li>
+                                <li>Implemented backup solutions achieving 99.9% uptime</li>
+                                <li>Developed PowerShell scripts automating 80% of routine tasks</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="education">
+                    <h3>Education</h3>
+                    <div class="education-item">
+                        <h4>Bachelor of Science in Computer Science</h4>
+                        <p>University of Technology</p>
+                        <p>2016 - 2020</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Portfolio Section -->
+            <section id="portfolio" class="section">
+                <h2 class="section-title">Portfolio</h2>
+                <div id="portfolio-grid" class="portfolio-grid">
+                    <!-- Portfolio cards will be populated by JavaScript -->
+                </div>
+                
+                <div id="portfolio-detail" class="portfolio-detail" style="display: none;">
+                    <button class="back-button" onclick="showPortfolioGrid()">← Back to Portfolio</button>
+                    <div id="portfolio-detail-content"></div>
+                </div>
+            </section>
+
+            <!-- Blog Section -->
+            <section id="blog" class="section">
+                <h2 class="section-title">Blog</h2>
+                <div id="blog-list" class="blog-list">
+                    <!-- Blog posts will be populated by JavaScript -->
+                </div>
+                
+                <div id="blog-article" class="blog-article" style="display: none;">
+                    <button class="back-button" onclick="showBlogList()">← Back to Blog</button>
+                    <div id="blog-article-content"></div>
+                </div>
+            </section>
+
+            <!-- Skills Section -->
+            <section id="skills" class="section">
+                <h2 class="section-title">Skills & Certifications</h2>
+                
+                <div class="skills-grid">
+                    <div class="skill-category">
+                        <h3>Networking</h3>
+                        <div class="skill-item">
+                            <span class="skill-name">TCP/IP</span>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 90%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <span class="skill-name">Firewalls</span>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 85%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <span class="skill-name">VPN</span>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 80%"></div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="skill-category">
+                        <h3>Security Tools</h3>
+                        <div class="skill-item">
+                            <span class="skill-name">Nmap</span>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 88%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <span class="skill-name">Wireshark</span>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 82%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <span class="skill-name">Burp Suite</span>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 75%"></div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="skill-category">
+                        <h3>Scripting</h3>
+                        <div class="skill-item">
+                            <span class="skill-name">Python</span>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 85%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <span class="skill-name">Bash</span>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 80%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <span class="skill-name">PowerShell</span>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 78%"></div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="skill-category">
+                        <h3>Cloud & OS</h3>
+                        <div class="skill-item">
+                            <span class="skill-name">AWS</span>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 70%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <span class="skill-name">Linux</span>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 88%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <span class="skill-name">Windows Server</span>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 75%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="certifications">
+                    <h3>Certifications</h3>
+                    <div class="cert-grid">
+                        <div class="cert-item">
+                            <h4>Security+</h4>
+                            <p>CompTIA</p>
+                            <span class="cert-year">2023</span>
+                        </div>
+                        <div class="cert-item">
+                            <h4>CySA+</h4>
+                            <p>CompTIA</p>
+                            <span class="cert-year">2023</span>
+                        </div>
+                        <div class="cert-item">
+                            <h4>CCNA</h4>
+                            <p>Cisco</p>
+                            <span class="cert-year">2022</span>
+                        </div>
+                        <div class="cert-item">
+                            <h4>CEH</h4>
+                            <p>EC-Council</p>
+                            <span class="cert-year">2022</span>
+                        </div>
+                        <div class="cert-item">
+                            <h4>AWS Security</h4>
+                            <p>Amazon</p>
+                            <span class="cert-year">2024</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Contact Section -->
+            <section id="contact" class="section">
+                <h2 class="section-title">Contact</h2>
+                <div class="contact-grid">
+                    <div class="contact-item">
+                        <h3>Email</h3>
+                        <button class="contact-link" data-copy="alex.chen@email.com">
+                            alex.chen@email.com
+                        </button>
+                    </div>
+                    <div class="contact-item">
+                        <h3>GitHub</h3>
+                        <button class="contact-link" data-copy="github.com/alexchen">
+                            github.com/alexchen
+                        </button>
+                    </div>
+                    <div class="contact-item">
+                        <h3>LinkedIn</h3>
+                        <button class="contact-link" data-copy="linkedin.com/in/alexchen">
+                            linkedin.com/in/alexchen
+                        </button>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Command Palette -->
+    <div id="command-palette" class="command-palette" style="display: none;">
+        <div class="command-palette-content">
+            <input type="text" id="command-input" placeholder="Search projects and posts..." autocomplete="off">
+            <div id="command-results" class="command-results"></div>
+        </div>
+    </div>
+
+    <!-- Toast for copy feedback -->
+    <div id="toast" class="toast">Copied!</div>
+
+    <script src="script.js"></script>
+</body>
+</html>
