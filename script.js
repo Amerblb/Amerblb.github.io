@@ -625,7 +625,7 @@ function showToast(message) {
 function downloadResume() {
     // Create a simple PDF-like resume content
     const resumeContent = `
-Alex Chen - Cybersecurity & IT Professional
+Amer Blboheath - Cybersecurity & IT Professional
 ==========================================
 
 EXPERIENCE
@@ -675,9 +675,9 @@ Cloud & OS: AWS, Linux, Windows Server
 CONTACT
 -------
 
-Email: alex.chen@email.com
-GitHub: github.com/alexchen
-LinkedIn: linkedin.com/in/alexchen
+Email: blboheath@outlook.com
+GitHub: github.com/amerblb
+LinkedIn: linkedin.com/in/amerblboheath
     `;
     
     // Create and download the file
@@ -685,7 +685,7 @@ LinkedIn: linkedin.com/in/alexchen
     const url = window.URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
-    a.download = 'Alex_Chen_Resume.txt';
+    a.download = 'Amer_Blboheath_Resume.txt';
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
