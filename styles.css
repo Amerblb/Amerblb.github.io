@@ -6,35 +6,37 @@
 }
 
 :root {
-    /* Clean Black & White Theme */
-    --bg-primary: #ffffff;
-    --bg-secondary: #f8f9fa;
-    --bg-tertiary: #f1f3f4;
-    --bg-quaternary: #e8eaed;
-    --text-primary: #000000;
-    --text-secondary: #333333;
-    --text-tertiary: #666666;
-    --text-quaternary: #999999;
-    --border-color: #e1e5e9;
-    --border-light: #f0f0f0;
-    --accent-color: #000000;
-    --accent-hover: #333333;
-    --accent-light: #f5f5f5;
-    --success-color: #000000;
-    --warning-color: #666666;
-    --error-color: #333333;
+    /* Anthropic Design System - Clean & Minimal */
+    --bg-primary: #FFFFFF;
+    --bg-secondary: #F8F9FA;
+    --bg-tertiary: #F1F3F4;
+    --bg-quaternary: #E8EAED;
+    --text-primary: #1A1A1A;
+    --text-secondary: #3C3C3C;
+    --text-tertiary: #6B6B6B;
+    --text-quaternary: #9A9A9A;
+    --border-color: #E1E5E9;
+    --border-light: #F0F0F0;
+    --accent-color: #005F73;
+    --accent-hover: #004A5C;
+    --accent-light: #F0F7F8;
+    --success-color: #4CAF50;
+    --warning-color: #FF9800;
+    --error-color: #F44336;
+    --info-color: #2196F3;
     --shadow-xs: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
     --shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px -1px rgba(0, 0, 0, 0.1);
     --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
     --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
     --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
-    --radius: 12px;
-    --radius-sm: 8px;
-    --radius-xs: 6px;
-    --radius-lg: 16px;
-    --transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-    --transition-fast: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
-    --transition-slow: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --radius: 8px;
+    --radius-sm: 6px;
+    --radius-xs: 4px;
+    --radius-lg: 12px;
+    --radius-xl: 16px;
+    --transition: all 0.2s ease;
+    --transition-fast: all 0.15s ease;
+    --transition-slow: all 0.3s ease;
     --spacing-xs: 0.25rem;
     --spacing-sm: 0.5rem;
     --spacing-md: 1rem;
@@ -42,26 +44,28 @@
     --spacing-xl: 2rem;
     --spacing-2xl: 3rem;
     --spacing-3xl: 4rem;
+    --spacing-4xl: 6rem;
 }
 
-/* Dark theme colors - Clean Black & White Dark Mode */
+/* Dark theme colors - Anthropic Dark Mode */
 .dark {
-    --bg-primary: #000000;
-    --bg-secondary: #111111;
-    --bg-tertiary: #1a1a1a;
-    --bg-quaternary: #262626;
-    --text-primary: #ffffff;
-    --text-secondary: #cccccc;
-    --text-tertiary: #999999;
-    --text-quaternary: #666666;
-    --border-color: #333333;
-    --border-light: #1a1a1a;
-    --accent-color: #ffffff;
-    --accent-hover: #e0e0e0;
-    --accent-light: #1a1a1a;
-    --success-color: #ffffff;
-    --warning-color: #cccccc;
-    --error-color: #cccccc;
+    --bg-primary: #1A1A1A;
+    --bg-secondary: #2A2A2A;
+    --bg-tertiary: #3A3A3A;
+    --bg-quaternary: #4A4A4A;
+    --text-primary: #FFFFFF;
+    --text-secondary: #E0E0E0;
+    --text-tertiary: #B0B0B0;
+    --text-quaternary: #808080;
+    --border-color: #3A3A3A;
+    --border-light: #2A2A2A;
+    --accent-color: #005F73;
+    --accent-hover: #007A9A;
+    --accent-light: #2A2A2A;
+    --success-color: #4CAF50;
+    --warning-color: #FF9800;
+    --error-color: #F44336;
+    --info-color: #2196F3;
     --shadow-xs: 0 1px 2px 0 rgba(0, 0, 0, 0.3);
     --shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.4), 0 1px 2px -1px rgba(0, 0, 0, 0.4);
     --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.4), 0 2px 4px -2px rgba(0, 0, 0, 0.4);
@@ -69,18 +73,19 @@
     --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.4), 0 8px 10px -6px rgba(0, 0, 0, 0.4);
 }
 
-/* Typography - Apple-style with LinkedIn inspiration */
+/* Typography - Anthropic Style */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
 body {
-    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-    font-size: clamp(16px, 2.5vw, 18px);
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    font-size: 16px;
     line-height: 1.6;
-    color: var(--text-secondary);
+    color: var(--text-primary);
     background-color: var(--bg-primary);
     transition: var(--transition);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     font-weight: 400;
-    letter-spacing: -0.01em;
 }
 
 /* Serif font for article content */
@@ -113,7 +118,7 @@ body {
     min-height: 100vh;
 }
 
-/* Sidebar - LinkedIn-inspired design */
+/* Sidebar - Anthropic Style */
 .sidebar {
     position: fixed;
     left: 0;
@@ -121,14 +126,12 @@ body {
     width: 280px;
     height: 100vh;
     background: var(--bg-primary);
-    backdrop-filter: blur(20px);
     border-right: 1px solid var(--border-color);
     padding: var(--spacing-2xl) var(--spacing-xl);
     z-index: 100;
     overflow-y: auto;
     display: flex;
     flex-direction: column;
-    box-shadow: var(--shadow-sm);
 }
 
 .sidebar-header {
@@ -173,26 +176,18 @@ body {
     transition: var(--transition);
     font-weight: 500;
     font-size: 0.95rem;
-    letter-spacing: -0.01em;
-    position: relative;
-    background: var(--bg-primary);
-    border: 1px solid var(--border-color);
     margin-bottom: var(--spacing-xs);
 }
 
 .nav-link:hover {
-    background: var(--bg-tertiary);
     color: var(--text-primary);
-    transform: translateX(2px);
-    border-color: var(--border-color);
+    background: var(--bg-secondary);
 }
 
 .nav-link.active {
     background: var(--accent-color);
     color: white;
     font-weight: 600;
-    box-shadow: var(--shadow-sm);
-    border-color: var(--accent-color);
 }
 
 .sidebar-footer {
@@ -283,7 +278,7 @@ body {
 
 .section {
     display: none;
-    animation: fadeIn 0.2s ease-out;
+    animation: fadeIn 0.3s ease-out;
 }
 
 .section.active {
@@ -291,17 +286,17 @@ body {
 }
 
 @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(8px); }
+    from { opacity: 0; transform: translateY(10px); }
     to { opacity: 1; transform: translateY(0); }
 }
 
 .section-title {
     font-size: 2.5rem;
-    font-weight: 800;
+    font-weight: 700;
     margin-bottom: var(--spacing-2xl);
     color: var(--text-primary);
-    letter-spacing: -0.04em;
-    line-height: 1.1;
+    letter-spacing: -0.02em;
+    line-height: 1.2;
 }
 
 /* Section Headers */
@@ -312,6 +307,20 @@ body {
     margin-bottom: var(--spacing-2xl);
     flex-wrap: wrap;
     gap: var(--spacing-lg);
+}
+
+/* Smooth scrolling */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Enhanced focus styles for accessibility */
+button:focus,
+a:focus,
+input:focus {
+    outline: 2px solid var(--accent-color);
+    outline-offset: 2px;
+    border-radius: var(--radius-sm);
 }
 
 .download-btn {
@@ -342,7 +351,7 @@ body {
     box-shadow: var(--shadow-sm);
 }
 
-/* Home Section - LinkedIn-inspired hero */
+/* Home Section */
 .hero {
     margin-bottom: var(--spacing-3xl);
     padding: var(--spacing-2xl) 0;
@@ -351,11 +360,11 @@ body {
 
 .hero-title {
     font-size: 2.5rem;
-    font-weight: 800;
+    font-weight: 700;
     margin-bottom: var(--spacing-lg);
     color: var(--text-primary);
-    letter-spacing: -0.03em;
-    line-height: 1.1;
+    letter-spacing: -0.02em;
+    line-height: 1.2;
 }
 
 .hero-summary {
@@ -364,7 +373,6 @@ body {
     max-width: 600px;
     line-height: 1.7;
     font-weight: 400;
-    letter-spacing: -0.01em;
     margin: 0 auto;
 }
 
@@ -387,31 +395,15 @@ body {
     box-shadow: var(--shadow-xs);
 }
 
-.metric-card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 3px;
-    background: linear-gradient(90deg, var(--accent-color), var(--accent-hover));
-    transform: scaleX(0);
-    transition: var(--transition);
-}
-
 .metric-card:hover {
     transform: translateY(-2px);
     box-shadow: var(--shadow-md);
     border-color: var(--accent-color);
 }
 
-.metric-card:hover::before {
-    transform: scaleX(1);
-}
-
 .metric-number {
     font-size: 2rem;
-    font-weight: 800;
+    font-weight: 700;
     color: var(--accent-color);
     margin-bottom: var(--spacing-sm);
     letter-spacing: -0.02em;
@@ -422,7 +414,6 @@ body {
     color: var(--text-secondary);
     font-size: 0.875rem;
     font-weight: 600;
-    letter-spacing: 0.01em;
 }
 
 /* Resume Section */
@@ -577,7 +568,7 @@ body {
     font-weight: 500;
 }
 
-/* Portfolio Section - LinkedIn-style cards */
+/* Portfolio Section */
 .portfolio-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
@@ -596,26 +587,10 @@ body {
     box-shadow: var(--shadow-xs);
 }
 
-.portfolio-card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 4px;
-    background: linear-gradient(90deg, var(--accent-color), var(--accent-hover));
-    transform: scaleX(0);
-    transition: var(--transition);
-}
-
 .portfolio-card:hover {
     transform: translateY(-4px);
     box-shadow: var(--shadow-lg);
     border-color: var(--accent-color);
-}
-
-.portfolio-card:hover::before {
-    transform: scaleX(1);
 }
 
 .portfolio-card h3 {
@@ -632,7 +607,6 @@ body {
     margin-bottom: var(--spacing-lg);
     line-height: 1.7;
     font-size: 0.95rem;
-    letter-spacing: -0.01em;
 }
 
 .portfolio-tools {
@@ -667,7 +641,7 @@ body {
 
 .tag {
     background: var(--accent-color);
-    color: var(--bg-primary);
+    color: white;
     padding: var(--spacing-xs) var(--spacing-md);
     border-radius: 20px;
     font-size: 0.8rem;
@@ -989,7 +963,7 @@ body {
     height: 100%;
     background: linear-gradient(90deg, var(--accent-color), var(--accent-hover));
     border-radius: var(--radius-xs);
-    transition: width 1.5s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: width 1.5s ease;
     position: relative;
     overflow: hidden;
 }
@@ -1078,7 +1052,7 @@ body {
     font-size: 0.875rem;
 }
 
-/* Contact Section - Apple-style buttons */
+/* Contact Section */
 .contact-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -1245,15 +1219,25 @@ body {
     }
     
     .hero-title {
-        font-size: 2.25rem;
+        font-size: 2.5rem;
+    }
+    
+    .section-title {
+        font-size: 2.5rem;
     }
     
     .metrics {
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: repeat(2, 1fr);
+        gap: var(--spacing-lg);
     }
     
     .portfolio-grid {
-        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: var(--spacing-xl);
+    }
+    
+    .contact-grid {
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     }
 }
 
@@ -1300,7 +1284,7 @@ body {
     }
     
     .section-title {
-        font-size: 1.75rem;
+        font-size: 2rem;
     }
     
     .metrics {
@@ -1405,18 +1389,18 @@ body {
     }
     
     .hero-title {
-        font-size: 1.75rem;
+        font-size: 1.875rem;
         line-height: 1.2;
     }
     
     .hero-summary {
-        font-size: 0.95rem;
+        font-size: 1rem;
         line-height: 1.6;
     }
     
     .section-title {
-        font-size: 1.25rem;
-        margin-bottom: 1.5rem;
+        font-size: 1.5rem;
+        margin-bottom: var(--spacing-xl);
     }
     
     .metrics {
