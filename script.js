@@ -344,6 +344,11 @@ function cacheElements() {
     elements.themeToggle = document.querySelector('.theme-toggle');
     elements.navLinks = document.querySelectorAll('.nav-link');
     elements.contactLinks = document.querySelectorAll('.contact-link');
+    
+    // Add error handling for missing elements
+    if (!elements.sidebar) console.warn('Sidebar element not found');
+    if (!elements.mobileMenuToggle) console.warn('Mobile menu toggle not found');
+    if (!elements.commandPalette) console.warn('Command palette not found');
 }
 
 // Theme management
@@ -389,7 +394,10 @@ function toggleTheme() {
 
 // Mobile menu management
 function initializeMobileMenu() {
-    if (!elements.mobileMenuToggle || !elements.sidebar) return;
+    if (!elements.mobileMenuToggle || !elements.sidebar) {
+        console.warn('Mobile menu elements not found');
+        return;
+    }
     
     elements.mobileMenuToggle.addEventListener('click', toggleMobileMenu);
     
@@ -405,6 +413,8 @@ function initializeMobileMenu() {
     // Close mobile menu when clicking outside
     document.addEventListener('click', (e) => {
         if (window.innerWidth <= 768 && 
+            elements.sidebar && 
+            elements.mobileMenuToggle &&
             !elements.sidebar.contains(e.target) && 
             !elements.mobileMenuToggle.contains(e.target) &&
             state.isMobileMenuOpen) {
@@ -425,17 +435,27 @@ function toggleMobileMenu() {
 }
 
 function openMobileMenu() {
+    if (!elements.sidebar || !elements.mobileMenuToggle) return;
+    
     elements.sidebar.classList.add('open');
     elements.mobileMenuToggle.classList.add('active');
     elements.mobileMenuToggle.setAttribute('aria-expanded', 'true');
     state.isMobileMenuOpen = true;
+    
+    // Prevent body scroll when menu is open
+    document.body.style.overflow = 'hidden';
 }
 
 function closeMobileMenu() {
+    if (!elements.sidebar || !elements.mobileMenuToggle) return;
+    
     elements.sidebar.classList.remove('open');
     elements.mobileMenuToggle.classList.remove('active');
     elements.mobileMenuToggle.setAttribute('aria-expanded', 'false');
     state.isMobileMenuOpen = false;
+    
+    // Restore body scroll
+    document.body.style.overflow = '';
 }
 
 // Navigation
@@ -475,6 +495,11 @@ function initializeCommandPalette() {
     const commandInput = document.getElementById('command-input');
     const commandResults = document.getElementById('command-results');
     
+    if (!commandPalette || !commandInput || !commandResults) {
+        console.warn('Command palette elements not found');
+        return;
+    }
+    
     // Open command palette
     document.addEventListener('keydown', function(e) {
         if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
@@ -509,6 +534,8 @@ function openCommandPalette() {
     const commandPalette = document.getElementById('command-palette');
     const commandInput = document.getElementById('command-input');
     
+    if (!commandPalette || !commandInput) return;
+    
     commandPalette.style.display = 'flex';
     commandInput.focus();
     state.isCommandPaletteOpen = true;
@@ -519,14 +546,18 @@ function closeCommandPalette() {
     const commandInput = document.getElementById('command-input');
     const commandResults = document.getElementById('command-results');
     
+    if (!commandPalette || !commandInput) return;
+    
     commandPalette.style.display = 'none';
     commandInput.value = '';
-    commandResults.innerHTML = '';
+    if (commandResults) commandResults.innerHTML = '';
     state.isCommandPaletteOpen = false;
 }
 
 function searchContent(query) {
     const commandResults = document.getElementById('command-results');
+    if (!commandResults) return;
+    
     const results = [];
     
     // Search projects
@@ -597,18 +628,37 @@ function initializeContactLinks() {
 }
 
 function copyToClipboard(text) {
-    navigator.clipboard.writeText(text).then(() => {
-        showToast('Copied!');
-    }).catch(() => {
-        // Fallback for older browsers
+    // Check if clipboard API is available
+    if (navigator.clipboard && window.isSecureContext) {
+        navigator.clipboard.writeText(text).then(() => {
+            showToast('Copied!');
+        }).catch((err) => {
+            console.error('Failed to copy to clipboard:', err);
+            fallbackCopyToClipboard(text);
+        });
+    } else {
+        // Fallback for older browsers or non-secure contexts
+        fallbackCopyToClipboard(text);
+    }
+}
+
+function fallbackCopyToClipboard(text) {
+    try {
         const textArea = document.createElement('textarea');
         textArea.value = text;
+        textArea.style.position = 'fixed';
+        textArea.style.left = '-999999px';
+        textArea.style.top = '-999999px';
         document.body.appendChild(textArea);
+        textArea.focus();
         textArea.select();
         document.execCommand('copy');
         document.body.removeChild(textArea);
         showToast('Copied!');
-    });
+    } catch (err) {
+        console.error('Fallback copy failed:', err);
+        showToast('Copy failed - please copy manually');
+    }
 }
 
 function showToast(message) {
@@ -625,59 +675,86 @@ function showToast(message) {
 function downloadResume() {
     // Create a simple PDF-like resume content
     const resumeContent = `
-Amer Blboheath - Cybersecurity & IT Professional
-==========================================
+Amer Blboheath
+437.484.4883 | Blboheath@outlook.com | Toronto, ON | linkedin.com/in/amerblboheath
+__________________________________________________________
+IT HELPDESK ANALYST – HEALTHCARE TECHNOLOGY SPECIALIST
 
-EXPERIENCE
-----------
+Summary of Qualifications
+Dynamic IT professional with 8+ years delivering exceptional technical support in enterprise
+environments, specializing in end-user support, onboarding/offboarding processes, and executive-
+level IT services. Proven expertise in Windows, MacOS, mobile device management, and ITSM
+platforms including ServiceNow. Passionate about leveraging technology to support healthcare
+transformation and helping organizations achieve operational excellence.
 
-Senior Cybersecurity Analyst
-TechCorp Security | 2022 - Present
-• Reduced incident response time by 40% through automated threat detection
-• Implemented SIEM solution covering 500+ endpoints across 3 data centers
-• Led security awareness training for 200+ employees, reducing phishing click rates by 60%
+Technical Skills
+Operating Systems: Windows 10/11, MacOS, Linux, iOS, Android
+Microsoft Ecosystem: Office 365, Exchange Online, SharePoint, OneDrive, Teams, Intune, Active Directory
+ITSM Platforms: ServiceNow, JIRA (ITIL-aligned processes)
+Networking: TCP/IP, DNS, DHCP, VPN, Firewall configuration
+Automation: PowerShell, Bash scripting, Python
+AV/Conferencing: Zoom, Microsoft Teams, Crestron, AirMedia
+MDM Solutions: Microsoft Intune, JAMF basics
 
-Network Security Engineer
-SecureNet Solutions | 2021 - 2022
-• Deployed firewall rules reducing attack surface by 35%
-• Configured VPN infrastructure supporting 150+ remote workers
-• Conducted vulnerability assessments identifying 200+ security gaps
+Education & Certifications
+Google IT Support Professional Certificate June 2025
+Career Essentials in Generative AI June 2025
+Junior IT Analyst Program June 2025
+NPower Canada │ Toronto, ON
+14-week intensive online class training on the fundamentals of computer technology, and project
+management essentials.
+• Configured and supported Windows/Linux systems, disk partitions, and file systems.
+• Troubleshot PC, IoT, and network issues while applying ITIL-aligned best practices.
+• Managed users and devices via Active Directory and OpenLDAP.
+• Gained hands-on experience with DNS, DHCP, and network protocols.
 
-IT Support Specialist
-StartupXYZ | 2020 - 2021
-• Managed Active Directory for 50+ users across multiple domains
-• Implemented backup solutions achieving 99.9% uptime
-• Developed PowerShell scripts automating 80% of routine tasks
+Bachelor of Arts in International Business Management April 2014
+Asia Pacific University | Kuala Lumpur, Malaysia
 
-EDUCATION
----------
+Work Experience
+IT Support Specialist November 2019 - November 2023
+Accenture │ Jakarta, Indonesia
+• Delivered comprehensive 1st and 2nd level technical support for 5,000+ enterprise users across
+Windows and MacOS environments, achieving 95% first-contact resolution rate
+• Managed end-to-end onboarding and offboarding procedures, including Active Directory
+account creation, Office 365 provisioning, and mobile device configuration
+• Implemented and maintained audio/video conferencing solutions (Teams, Zoom, Crestron)
+for executive meetings and corporate communications
+• Documented technical procedures and created knowledge base articles, reducing repeat
+incidents by 30%
+• Provided dedicated IT support for senior executives, prioritizing urgent requests and ensuring
+optimal system performance
+• Collaborated with Infrastructure and Cybersecurity teams to escalate and resolve complex
+technical issues
+• Performed system imaging, software deployments, and security updates across 500+
+workstations
 
-Bachelor of Science in Computer Science
-University of Technology | 2016 - 2020
+Technical Support Analyst October 2015 - October 2019
+Cognizant │ Singapore, Singapore
+• Managed 300+ daily service requests through ServiceNow, maintaining SLAs and ITIL best
+practices
+• Supported diverse hardware including workstations, tablets, mobile phones, printers, and
+peripheral devices
+• Administered Office 365 user accounts and implemented MFA for enhanced security
+• Configured and troubleshot multifunctional printers and IP phone systems
+• Assisted with large-scale OS migrations and software rollouts, improving system efficiency by 20%
+• Provided after-hours on-call support on rotating schedule, ensuring business continuity
 
-CERTIFICATIONS
---------------
-
-• Security+ (CompTIA) - 2023
-• CySA+ (CompTIA) - 2023
-• CCNA (Cisco) - 2022
-• CEH (EC-Council) - 2022
-• AWS Security (Amazon) - 2024
-
-SKILLS
-------
-
-Networking: TCP/IP, Firewalls, VPN
-Security Tools: Nmap, Wireshark, Burp Suite
-Scripting: Python, Bash, PowerShell
-Cloud & OS: AWS, Linux, Windows Server
+Junior IT Systems Support August 2014 - September 2015
+Marcusevans Group| Kuala Lumpur, Malaysia
+• Supported IT infrastructure with 99.5% uptime for enterprise applications
+• Created and managed user accounts in Active Directory for 5,000+ employees
+• Performed routine security patches, OS updates, and system backups
+• Documented IT processes and maintained technical documentation library
 
 CONTACT
 -------
 
 Email: blboheath@outlook.com
-GitHub: github.com/amerblb
+Phone: 437.484.4883
 LinkedIn: linkedin.com/in/amerblboheath
+GitHub: github.com/amerblb
+Location: Toronto, ON, Canada
     `;
     
     // Create and download the file
