@@ -6,7 +6,7 @@
     <title>Amer Blboheath - IT Helpdesk Analyst & Healthcare Technology Specialist | Toronto</title>
     
     <!-- SEO Meta Tags -->
-    <meta name="description" content="Amer Blboheath - Experienced IT Helpdesk Analyst with 8+ years in enterprise technical support, specializing in healthcare technology, Windows/MacOS support, and ITSM platforms. Based in Toronto, ON.">
+    <meta name="description" content="Amer Blboheath - Senior IT Helpdesk Analyst with 8+ years of enterprise technical support experience. Specializing in Windows/MacOS support, ServiceNow ITSM, Office 365 administration, and healthcare technology solutions. Based in Toronto, ON.">
     <meta name="keywords" content="IT Helpdesk Analyst, Healthcare Technology, Technical Support, Windows, MacOS, ServiceNow, Office 365, Active Directory, Toronto IT Professional, Enterprise Support">
     <meta name="author" content="Amer Blboheath">
     <meta name="robots" content="index, follow">
@@ -23,7 +23,7 @@
     <meta property="og:url" content="https://amerblb.github.io/">
     <meta property="og:site_name" content="Amer Blboheath Portfolio">
     <meta property="og:locale" content="en_CA">
-    <meta property="og:image" content="https://amerblb.github.io/og-image.jpg">
+    <!-- <meta property="og:image" content="https://amerblb.github.io/og-image.jpg"> -->
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
     <meta property="og:image:alt" content="Amer Blboheath - IT Helpdesk Analyst">
@@ -32,20 +32,20 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Amer Blboheath - IT Helpdesk Analyst & Healthcare Technology Specialist">
     <meta name="twitter:description" content="Experienced IT professional with 8+ years delivering exceptional technical support in enterprise environments.">
-    <meta name="twitter:image" content="https://amerblb.github.io/og-image.jpg">
+    <!-- <meta name="twitter:image" content="https://amerblb.github.io/og-image.jpg"> -->
     <meta name="twitter:image:alt" content="Amer Blboheath - IT Helpdesk Analyst">
     
     <!-- Canonical URL -->
     <link rel="canonical" href="https://amerblb.github.io/">
     
     <!-- Google Search Console Verification -->
-    <meta name="google-site-verification" content="YOUR_GOOGLE_SEARCH_CONSOLE_VERIFICATION_CODE">
+    <!-- <meta name="google-site-verification" content="YOUR_GOOGLE_SEARCH_CONSOLE_VERIFICATION_CODE"> -->
     
     <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <!-- <link rel="icon" type="image/x-icon" href="favicon.ico">
     <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png"> -->
     <link rel="manifest" href="site.webmanifest">
     
     <!-- Preconnect to external domains -->
@@ -119,6 +119,9 @@
 <body>
     <a href="#main" class="skip-link">Skip to main content</a>
     
+    <!-- Scroll Progress Bar -->
+    <div class="scroll-progress" aria-hidden="true"></div>
+    
     <div class="app">
         <!-- Sidebar Navigation -->
         <nav id="sidebar" class="sidebar" role="navigation" aria-label="Main navigation">
@@ -137,7 +140,7 @@
             </ul>
             
             <div class="sidebar-footer">
-                <button class="theme-toggle" aria-label="Toggle dark mode">
+                <button class="theme-toggle" aria-label="Toggle dark mode" title="Switch between light and dark themes">
                     <svg class="theme-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <circle cx="12" cy="12" r="5"/>
                         <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
@@ -145,7 +148,7 @@
                 </button>
                 <div class="attribution">
                     <p class="made-by">Made by Amer Blboheath</p>
-                    <p class="copyright">© 2025 All rights reserved</p>
+                    <p class="copyright">© <span id="current-year">2025</span> All rights reserved</p>
                 </div>
             </div>
         </nav>
@@ -174,21 +177,21 @@
                     </p>
                 </div>
                 
-                <div class="metrics">
-                    <div class="metric-card">
-                        <div class="metric-number">8+</div>
+                <div class="metrics" role="region" aria-label="Professional achievements">
+                    <div class="metric-card" role="article" aria-label="Years of experience">
+                        <div class="metric-number" aria-label="8 plus years">8+</div>
                         <div class="metric-label">Years Experience</div>
                     </div>
-                    <div class="metric-card">
-                        <div class="metric-number">5,000+</div>
+                    <div class="metric-card" role="article" aria-label="Users supported">
+                        <div class="metric-number" aria-label="5000 plus users">5,000+</div>
                         <div class="metric-label">Users Supported</div>
                     </div>
-                    <div class="metric-card">
-                        <div class="metric-number">95%</div>
+                    <div class="metric-card" role="article" aria-label="First contact resolution rate">
+                        <div class="metric-number" aria-label="95 percent">95%</div>
                         <div class="metric-label">First-Contact Resolution</div>
                     </div>
-                    <div class="metric-card">
-                        <div class="metric-number">99.5%</div>
+                    <div class="metric-card" role="article" aria-label="System uptime">
+                        <div class="metric-number" aria-label="99.5 percent">99.5%</div>
                         <div class="metric-label">System Uptime</div>
                     </div>
                 </div>
@@ -198,7 +201,7 @@
             <section id="resume" class="section">
                 <div class="section-header">
                     <h2 class="section-title">Resume</h2>
-                    <button class="download-btn" onclick="downloadResume()">
+                    <button class="download-btn" onclick="downloadResume()" aria-label="Download resume as PDF" title="Download resume">
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
                             <polyline points="7,10 12,15 17,10"/>
@@ -209,7 +212,7 @@
                 </div>
                 
                 <div class="resume-content">
-                    <div class="timeline">
+                    <div class="timeline" role="region" aria-label="Work experience timeline">
                         <div class="timeline-item">
                             <div class="timeline-marker"></div>
                             <div class="timeline-content">
@@ -261,14 +264,14 @@
                         </div>
                     </div>
                     
-                    <div class="education">
+                    <div class="education" role="region" aria-label="Education and certifications">
                         <div class="education-marker"></div>
                         <div class="education-content">
                             <h3>Education & Certifications</h3>
                             <h4>Google IT Support Professional Certificate</h4>
                             <p>Career Essentials in Generative AI</p>
                             <p>Junior IT Analyst Program</p>
-                            <p><strong>NPower Canada</strong> | Toronto, ON | June 2025</p>
+                            <p><strong>NPower Canada</strong> | Toronto, ON | June 2024</p>
                             <p>14-week intensive online class training on the fundamentals of computer technology, and project management essentials.</p>
                             <ul>
                                 <li>Configured and supported Windows/Linux systems, disk partitions, and file systems</li>
@@ -287,12 +290,12 @@
             <!-- Portfolio Section -->
             <section id="portfolio" class="section">
                 <h2 class="section-title">Portfolio</h2>
-                <div id="portfolio-grid" class="portfolio-grid">
+                <div id="portfolio-grid" class="portfolio-grid" role="region" aria-label="Portfolio projects">
                     <!-- Portfolio cards will be populated by JavaScript -->
                 </div>
                 
                 <div id="portfolio-detail" class="portfolio-detail" style="display: none;">
-                    <button class="back-button" onclick="showPortfolioGrid()">← Back to Portfolio</button>
+                    <button class="back-button" onclick="showPortfolioGrid()" aria-label="Return to portfolio grid" title="Go back to portfolio list">← Back to Portfolio</button>
                     <div id="portfolio-detail-content"></div>
                 </div>
             </section>
@@ -300,12 +303,12 @@
             <!-- Blog Section -->
             <section id="blog" class="section">
                 <h2 class="section-title">Blog</h2>
-                <div id="blog-list" class="blog-list">
+                <div id="blog-list" class="blog-list" role="region" aria-label="Blog articles">
                     <!-- Blog posts will be populated by JavaScript -->
                 </div>
                 
                 <div id="blog-article" class="blog-article" style="display: none;">
-                    <button class="back-button" onclick="showBlogList()">← Back to Blog</button>
+                    <button class="back-button" onclick="showBlogList()" aria-label="Return to blog list" title="Go back to blog list">← Back to Blog</button>
                     <div id="blog-article-content"></div>
                 </div>
             </section>
@@ -314,7 +317,7 @@
             <section id="skills" class="section">
                 <h2 class="section-title">Skills & Certifications</h2>
                 
-                <div class="skills-grid">
+                <div class="skills-grid" role="region" aria-label="Technical skills and proficiencies">
                     <div class="skill-category">
                         <h3>Operating Systems</h3>
                         <div class="skill-item">
@@ -440,23 +443,23 @@
                     </div>
                 </div>
                 
-                <div class="certifications">
+                <div class="certifications" role="region" aria-label="Professional certifications">
                     <h3>Certifications</h3>
                     <div class="cert-grid">
                         <div class="cert-item">
                             <h4>Google IT Support Professional Certificate</h4>
                             <p>Google</p>
-                            <span class="cert-year">June 2025</span>
+                            <span class="cert-year">June 2024</span>
                         </div>
                         <div class="cert-item">
                             <h4>Career Essentials in Generative AI</h4>
                             <p>Google</p>
-                            <span class="cert-year">June 2025</span>
+                            <span class="cert-year">June 2024</span>
                         </div>
                         <div class="cert-item">
                             <h4>Junior IT Analyst Program</h4>
                             <p>NPower Canada</p>
-                            <span class="cert-year">June 2025</span>
+                            <span class="cert-year">June 2024</span>
                         </div>
                         <div class="cert-item">
                             <h4>Bachelor of Arts</h4>
@@ -470,7 +473,7 @@
             <!-- Contact Section -->
             <section id="contact" class="section">
                 <h2 class="section-title">Contact</h2>
-                <div class="contact-grid">
+                <div class="contact-grid" role="region" aria-label="Contact information">
                     <div class="contact-item">
                         <div class="contact-icon">
                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -479,9 +482,9 @@
                             </svg>
                         </div>
                         <h3>Email</h3>
-                        <button class="contact-link" data-copy="blboheath@outlook.com">
+                        <a href="mailto:blboheath@outlook.com" class="contact-link" data-copy="blboheath@outlook.com">
                             blboheath@outlook.com
-                        </button>
+                        </a>
                     </div>
                     <div class="contact-item">
                         <div class="contact-icon">
@@ -490,9 +493,9 @@
                             </svg>
                         </div>
                         <h3>Phone</h3>
-                        <button class="contact-link" data-copy="437.484.4883">
+                        <a href="tel:4374844883" class="contact-link" data-copy="437.484.4883">
                             437.484.4883
-                        </button>
+                        </a>
                     </div>
                     <div class="contact-item">
                         <div class="contact-icon">
@@ -503,9 +506,9 @@
                             </svg>
                         </div>
                         <h3>LinkedIn</h3>
-                        <button class="contact-link" data-copy="linkedin.com/in/amerblboheath">
+                        <a href="https://linkedin.com/in/amerblboheath" class="contact-link" data-copy="linkedin.com/in/amerblboheath" target="_blank" rel="noopener noreferrer">
                             linkedin.com/in/amerblboheath
-                        </button>
+                        </a>
                     </div>
                     <div class="contact-item">
                         <div class="contact-icon">
@@ -514,9 +517,9 @@
                             </svg>
                         </div>
                         <h3>GitHub</h3>
-                        <button class="contact-link" data-copy="github.com/amerblb">
+                        <a href="https://github.com/amerblb" class="contact-link" data-copy="github.com/amerblb" target="_blank" rel="noopener noreferrer">
                             github.com/amerblb
-                        </button>
+                        </a>
                     </div>
                     <div class="contact-item">
                         <div class="contact-icon">
@@ -526,15 +529,18 @@
                             </svg>
                         </div>
                         <h3>Location</h3>
-                        <button class="contact-link" data-copy="Toronto, ON, Canada">
+                        <a href="https://maps.google.com/?q=Toronto,ON,Canada" class="contact-link" target="_blank" rel="noopener noreferrer" data-copy="Toronto, ON, Canada">
                             Toronto, ON, Canada
-                        </button>
+                        </a>
                     </div>
                 </div>
             </section>
         </main>
     </div>
-
+    
+    <!-- Mobile Menu Overlay -->
+    <div class="mobile-menu-overlay" id="mobile-menu-overlay"></div>
+    
     <!-- Command Palette -->
     <div id="command-palette" class="command-palette" style="display: none;">
         <div class="command-palette-content">
@@ -557,6 +563,6 @@
     </script>
     -->
     
-    <script src="script.js"></script>
+    <script src="script.js" defer></script>
 </body>
 </html>

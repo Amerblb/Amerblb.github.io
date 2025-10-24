@@ -8,7 +8,7 @@ const projects = [
         role: "Pentester (lab)",
         outcomes: ["Improved detection rules", "Documented crack-resistance baselines"],
         tags: ["wireless", "pentest", "lab"],
-        links: { github: "#", demo: "#" },
+        links: { github: "https://github.com/amerblb", demo: "#" },
         details: {
             problem: "Need to understand Wi-Fi security vulnerabilities in controlled environment",
             approach: "Set up isolated lab with multiple AP configurations, captured handshakes using aircrack-ng suite",
@@ -24,7 +24,7 @@ const projects = [
         role: "Security Engineer",
         outcomes: ["40% faster incident response", "500+ endpoints monitored"],
         tags: ["siem", "monitoring", "enterprise"],
-        links: { github: "#", demo: "#" },
+        links: { github: "https://github.com/amerblb", demo: "#" },
         details: {
             problem: "Manual log analysis was too slow for effective threat detection",
             approach: "Implemented Splunk SIEM with custom dashboards and correlation rules",
@@ -40,7 +40,7 @@ const projects = [
         role: "Security Consultant",
         outcomes: ["15 critical vulnerabilities found", "Security training delivered"],
         tags: ["web-security", "owasp", "pentest"],
-        links: { github: "#", demo: "#" },
+        links: { github: "https://github.com/amerblb", demo: "#" },
         details: {
             problem: "Client needed comprehensive security assessment of web applications",
             approach: "Used OWASP testing methodology with automated and manual testing tools",
@@ -56,7 +56,7 @@ const projects = [
         role: "Security Awareness Lead",
         outcomes: ["60% reduction in click rates", "200+ employees trained"],
         tags: ["phishing", "awareness", "training"],
-        links: { github: "#", demo: "#" },
+        links: { github: "https://github.com/amerblb", demo: "#" },
         details: {
             problem: "High phishing click rates indicated need for security awareness training",
             approach: "Created realistic phishing campaigns with educational follow-up",
@@ -72,7 +72,7 @@ const projects = [
         role: "Incident Response Lead",
         outcomes: ["75% faster containment", "Automated evidence collection"],
         tags: ["incident-response", "automation", "python"],
-        links: { github: "#", demo: "#" },
+        links: { github: "https://github.com/amerblb", demo: "#" },
         details: {
             problem: "Manual incident response processes were too slow and error-prone",
             approach: "Developed automated workflows for common incident types",
@@ -88,7 +88,7 @@ const projects = [
         role: "Cloud Security Engineer",
         outcomes: ["Security posture improved", "Compliance gaps identified"],
         tags: ["aws", "cloud-security", "compliance"],
-        links: { github: "#", demo: "#" },
+        links: { github: "https://github.com/amerblb", demo: "#" },
         details: {
             problem: "Client needed to ensure AWS infrastructure met security best practices",
             approach: "Used AWS security tools and manual review to assess configurations",
@@ -104,7 +104,7 @@ const projects = [
         role: "Malware Analyst",
         outcomes: ["Automated analysis pipeline", "Threat intelligence feeds"],
         tags: ["malware", "analysis", "sandbox"],
-        links: { github: "#", demo: "#" },
+        links: { github: "https://github.com/amerblb", demo: "#" },
         details: {
             problem: "Manual malware analysis was time-consuming and risky",
             approach: "Set up automated sandbox environment with custom analysis scripts",
@@ -120,7 +120,7 @@ const projects = [
         role: "Network Security Architect",
         outcomes: ["Micro-segmentation achieved", "Attack surface reduced"],
         tags: ["zero-trust", "network", "architecture"],
-        links: { github: "#", demo: "#" },
+        links: { github: "https://github.com/amerblb", demo: "#" },
         details: {
             problem: "Traditional network security model was insufficient for modern threats",
             approach: "Implemented zero trust principles with micro-segmentation",
@@ -322,6 +322,7 @@ const elements = {
 
 // Initialize application
 document.addEventListener('DOMContentLoaded', function() {
+    updateCurrentYear();
     cacheElements();
     initializeTheme();
     initializeNavigation();
@@ -329,10 +330,79 @@ document.addEventListener('DOMContentLoaded', function() {
     initializeCommandPalette();
     initializeContactLinks();
     initializeKeyboardShortcuts();
+    initializeScrollProgress();
+    initializeSkillAnimations();
+    initializeServiceWorker();
     loadPortfolio();
     loadBlog();
     handleRoute();
 });
+
+// Update current year dynamically
+function updateCurrentYear() {
+    const currentYearElement = document.getElementById('current-year');
+    if (currentYearElement) {
+        currentYearElement.textContent = new Date().getFullYear();
+    }
+}
+
+// Scroll Progress Indicator
+function initializeScrollProgress() {
+    function updateScrollProgress() {
+        const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
+        const scrollProgress = (window.scrollY / scrollHeight) * 100;
+        const progressBar = document.querySelector('.scroll-progress');
+        if (progressBar) {
+            progressBar.style.transform = `scaleX(${scrollProgress / 100})`;
+        }
+    }
+    
+    window.addEventListener('scroll', updateScrollProgress);
+}
+
+// Skill Bar Animations
+function initializeSkillAnimations() {
+    const observerOptions = {
+        threshold: 0.3,
+        rootMargin: '0px'
+    };
+
+    const skillObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const progressBar = entry.target;
+                if (!progressBar.classList.contains('animated')) {
+                    progressBar.style.width = progressBar.dataset.width;
+                    progressBar.classList.add('animated');
+                }
+            }
+        });
+    }, observerOptions);
+
+    // Initialize skill bars
+    document.querySelectorAll('.skill-progress').forEach(bar => {
+        const currentWidth = bar.style.width;
+        bar.dataset.width = currentWidth;
+        bar.style.width = '0';
+        bar.style.transition = 'width 1.5s ease';
+        skillObserver.observe(bar);
+    });
+}
+
+// Service Worker Registration
+function initializeServiceWorker() {
+    if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+            navigator.serviceWorker.register('/sw.js')
+                .then(registration => {
+                    console.log('SW registered: ', registration);
+                })
+                .catch(registrationError => {
+                    console.log('SW registration failed: ', registrationError);
+                });
+        });
+    }
+}
 
 // Cache frequently used DOM elements
 function cacheElements() {
@@ -528,6 +598,34 @@ function initializeCommandPalette() {
             commandResults.innerHTML = '';
         }
     });
+    
+    // Keyboard navigation in command palette
+    commandInput.addEventListener('keydown', function(e) {
+        const results = document.querySelectorAll('.command-result');
+        const currentIndex = Array.from(results).findIndex(el => el.classList.contains('selected'));
+        
+        if (e.key === 'ArrowDown') {
+            e.preventDefault();
+            const nextIndex = currentIndex < results.length - 1 ? currentIndex + 1 : 0;
+            results.forEach(el => el.classList.remove('selected'));
+            if (results[nextIndex]) {
+                results[nextIndex].classList.add('selected');
+            }
+        } else if (e.key === 'ArrowUp') {
+            e.preventDefault();
+            const prevIndex = currentIndex > 0 ? currentIndex - 1 : results.length - 1;
+            results.forEach(el => el.classList.remove('selected'));
+            if (results[prevIndex]) {
+                results[prevIndex].classList.add('selected');
+            }
+        } else if (e.key === 'Enter') {
+            e.preventDefault();
+            const selectedResult = document.querySelector('.command-result.selected');
+            if (selectedResult) {
+                executeSearchResult(selectedResult);
+            }
+        }
+    });
 }
 
 function openCommandPalette() {
@@ -558,87 +656,141 @@ function searchContent(query) {
     const commandResults = document.getElementById('command-results');
     if (!commandResults) return;
     
+    // Debounce search to improve performance
+    clearTimeout(searchContent.debounceTimer);
+    searchContent.debounceTimer = setTimeout(() => {
+        performSearch(query, commandResults);
+    }, 150);
+}
+
+function performSearch(query, commandResults) {
     const results = [];
     
-    // Search projects
-    projects.forEach(project => {
-        if (project.title.toLowerCase().includes(query) || 
-            project.tags.some(tag => tag.toLowerCase().includes(query))) {
-            results.push({
-                type: 'project',
-                title: project.title,
-                meta: `Project • ${project.tags.join(', ')}`,
-                action: () => {
-                    navigateToSection('portfolio');
-                    setTimeout(() => showProjectDetail(project.id), 100);
-                }
-            });
-        }
+    // Search projects with optimized filtering
+    const projectResults = projects.filter(project => 
+        project.title.toLowerCase().includes(query) || 
+        project.summary.toLowerCase().includes(query) ||
+        project.tags.some(tag => tag.toLowerCase().includes(query)) ||
+        project.tools.some(tool => tool.toLowerCase().includes(query))
+    );
+    
+    projectResults.forEach(project => {
+        results.push({
+            type: 'project',
+            title: project.title,
+            meta: `Project • ${project.tags.join(', ')}`,
+            id: project.id
+        });
     });
     
-    // Search blog posts
-    posts.forEach(post => {
-        if (post.title.toLowerCase().includes(query) || 
-            post.tags.some(tag => tag.toLowerCase().includes(query))) {
-            results.push({
-                type: 'post',
-                title: post.title,
-                meta: `Blog Post • ${post.readMinutes} min read`,
-                action: () => {
-                    navigateToSection('blog');
-                    setTimeout(() => showBlogArticle(post.slug), 100);
-                }
-            });
-        }
+    // Search blog posts with optimized filtering
+    const postResults = posts.filter(post => 
+        post.title.toLowerCase().includes(query) || 
+        post.tags.some(tag => tag.toLowerCase().includes(query))
+    );
+    
+    postResults.forEach(post => {
+        results.push({
+            type: 'post',
+            title: post.title,
+            meta: `Blog Post • ${post.readMinutes} min read`,
+            slug: post.slug
+        });
+    });
+    
+    // Search sections
+    const sections = [
+        { id: 'home', title: 'Home', description: 'Main page with overview' },
+        { id: 'resume', title: 'Resume', description: 'Work experience and education' },
+        { id: 'portfolio', title: 'Portfolio', description: 'Projects and case studies' },
+        { id: 'blog', title: 'Blog', description: 'Technical articles and insights' },
+        { id: 'skills', title: 'Skills & Certifications', description: 'Technical skills and certifications' },
+        { id: 'contact', title: 'Contact', description: 'Get in touch' }
+    ];
+    
+    const sectionResults = sections.filter(section => 
+        section.title.toLowerCase().includes(query) || 
+        section.description.toLowerCase().includes(query)
+    );
+    
+    sectionResults.forEach(section => {
+        results.push({
+            type: 'section',
+            title: section.title,
+            meta: `Section • ${section.description}`,
+            id: section.id
+        });
     });
     
     // Display results
     if (results.length > 0) {
-        commandResults.innerHTML = results.map(result => `
-            <div class="command-result" onclick="executeSearchResult(this)">
-                <div class="command-result-title">${result.title}</div>
-                <div class="command-result-meta">${result.meta}</div>
+        commandResults.innerHTML = results.slice(0, 10).map((result, index) => `
+            <div class="command-result ${index === 0 ? 'selected' : ''}" 
+                 data-type="${result.type}" 
+                 data-id="${result.id || result.slug}"
+                 onclick="executeSearchResult(this)"
+                 role="option"
+                 aria-selected="${index === 0}">
+                <div class="result-content">
+                    <span class="result-title">${result.title}</span>
+                    <span class="result-meta">${result.meta}</span>
+                </div>
+                <span class="result-action">↵</span>
             </div>
         `).join('');
-        
-        // Store action for each result
-        document.querySelectorAll('.command-result').forEach((el, index) => {
-            el._action = results[index].action;
-        });
     } else {
-        commandResults.innerHTML = '<div class="command-result"><div class="command-result-title">No results found</div></div>';
+        commandResults.innerHTML = '<div class="no-results">No results found</div>';
     }
 }
 
-function executeSearchResult(element) {
-    if (element._action) {
-        element._action();
-        closeCommandPalette();
+function executeSearchResult(resultElement) {
+    const resultData = resultElement.dataset;
+    closeCommandPalette();
+    
+    if (resultData.type === 'project') {
+        navigateToSection('portfolio');
+        setTimeout(() => showProjectDetail(resultData.id), 100);
+    } else if (resultData.type === 'post') {
+        navigateToSection('blog');
+        setTimeout(() => showBlogArticle(resultData.id), 100);
+    } else if (resultData.type === 'section') {
+        navigateToSection(resultData.id);
     }
 }
 
 // Contact links
 function initializeContactLinks() {
     elements.contactLinks.forEach(link => {
-        link.addEventListener('click', function() {
-            const text = this.dataset.copy;
-            copyToClipboard(text);
+        link.addEventListener('click', function(e) {
+            // Only prevent default for non-anchor elements
+            if (this.tagName !== 'A') {
+                e.preventDefault();
+                const text = this.dataset.copy;
+                if (text) {
+                    copyToClipboard(text);
+                }
+            }
         });
     });
 }
 
 function copyToClipboard(text) {
-    // Check if clipboard API is available
-    if (navigator.clipboard && window.isSecureContext) {
-        navigator.clipboard.writeText(text).then(() => {
-            showToast('Copied!');
-        }).catch((err) => {
-            console.error('Failed to copy to clipboard:', err);
+    try {
+        // Check if clipboard API is available
+        if (navigator.clipboard && window.isSecureContext) {
+            navigator.clipboard.writeText(text).then(() => {
+                showToast('Copied!');
+            }).catch((err) => {
+                console.error('Failed to copy to clipboard:', err);
+                fallbackCopyToClipboard(text);
+            });
+        } else {
+            // Fallback for older browsers or non-secure contexts
             fallbackCopyToClipboard(text);
-        });
-    } else {
-        // Fallback for older browsers or non-secure contexts
-        fallbackCopyToClipboard(text);
+        }
+    } catch (error) {
+        console.error('Error in copyToClipboard:', error);
+        showToast('Copy failed - please copy manually', 'error');
     }
 }
 
@@ -657,118 +809,118 @@ function fallbackCopyToClipboard(text) {
         showToast('Copied!');
     } catch (err) {
         console.error('Fallback copy failed:', err);
-        showToast('Copy failed - please copy manually');
+        showToast('Copy failed - please copy manually', 'error');
     }
 }
 
-function showToast(message) {
+function showToast(message, type = 'success') {
     const toast = document.getElementById('toast');
+    if (!toast) return;
+    
+    // Clear any existing timeout
+    if (showToast.timeoutId) {
+        clearTimeout(showToast.timeoutId);
+    }
+    
     toast.textContent = message;
+    toast.className = `toast ${type}`;
     toast.classList.add('show');
     
-    setTimeout(() => {
+    showToast.timeoutId = setTimeout(() => {
         toast.classList.remove('show');
-    }, 2000);
+    }, 3000);
 }
 
 // Download Resume Function
 function downloadResume() {
-    // Create a simple PDF-like resume content
-    const resumeContent = `
-Amer Blboheath
-437.484.4883 | Blboheath@outlook.com | Toronto, ON | linkedin.com/in/amerblboheath
-__________________________________________________________
-IT HELPDESK ANALYST – HEALTHCARE TECHNOLOGY SPECIALIST
-
-Summary of Qualifications
-Dynamic IT professional with 8+ years delivering exceptional technical support in enterprise
-environments, specializing in end-user support, onboarding/offboarding processes, and executive-
-level IT services. Proven expertise in Windows, MacOS, mobile device management, and ITSM
-platforms including ServiceNow. Passionate about leveraging technology to support healthcare
-transformation and helping organizations achieve operational excellence.
-
-Technical Skills
-Operating Systems: Windows 10/11, MacOS, Linux, iOS, Android
-Microsoft Ecosystem: Office 365, Exchange Online, SharePoint, OneDrive, Teams, Intune, Active Directory
-ITSM Platforms: ServiceNow, JIRA (ITIL-aligned processes)
-Networking: TCP/IP, DNS, DHCP, VPN, Firewall configuration
-Automation: PowerShell, Bash scripting, Python
-AV/Conferencing: Zoom, Microsoft Teams, Crestron, AirMedia
-MDM Solutions: Microsoft Intune, JAMF basics
-
-Education & Certifications
-Google IT Support Professional Certificate June 2025
-Career Essentials in Generative AI June 2025
-Junior IT Analyst Program June 2025
-NPower Canada │ Toronto, ON
-14-week intensive online class training on the fundamentals of computer technology, and project
-management essentials.
-• Configured and supported Windows/Linux systems, disk partitions, and file systems.
-• Troubleshot PC, IoT, and network issues while applying ITIL-aligned best practices.
-• Managed users and devices via Active Directory and OpenLDAP.
-• Gained hands-on experience with DNS, DHCP, and network protocols.
-
-Bachelor of Arts in International Business Management April 2014
-Asia Pacific University | Kuala Lumpur, Malaysia
-
-Work Experience
-IT Support Specialist November 2019 - November 2023
-Accenture │ Jakarta, Indonesia
-• Delivered comprehensive 1st and 2nd level technical support for 5,000+ enterprise users across
-Windows and MacOS environments, achieving 95% first-contact resolution rate
-• Managed end-to-end onboarding and offboarding procedures, including Active Directory
-account creation, Office 365 provisioning, and mobile device configuration
-• Implemented and maintained audio/video conferencing solutions (Teams, Zoom, Crestron)
-for executive meetings and corporate communications
-• Documented technical procedures and created knowledge base articles, reducing repeat
-incidents by 30%
-• Provided dedicated IT support for senior executives, prioritizing urgent requests and ensuring
-optimal system performance
-• Collaborated with Infrastructure and Cybersecurity teams to escalate and resolve complex
-technical issues
-• Performed system imaging, software deployments, and security updates across 500+
-workstations
-
-Technical Support Analyst October 2015 - October 2019
-Cognizant │ Singapore, Singapore
-• Managed 300+ daily service requests through ServiceNow, maintaining SLAs and ITIL best
-practices
-• Supported diverse hardware including workstations, tablets, mobile phones, printers, and
-peripheral devices
-• Administered Office 365 user accounts and implemented MFA for enhanced security
-• Configured and troubleshot multifunctional printers and IP phone systems
-• Assisted with large-scale OS migrations and software rollouts, improving system efficiency by 20%
-• Provided after-hours on-call support on rotating schedule, ensuring business continuity
-
-Junior IT Systems Support August 2014 - September 2015
-Marcusevans Group| Kuala Lumpur, Malaysia
-• Supported IT infrastructure with 99.5% uptime for enterprise applications
-• Created and managed user accounts in Active Directory for 5,000+ employees
-• Performed routine security patches, OS updates, and system backups
-• Documented IT processes and maintained technical documentation library
-
-CONTACT
--------
-
-Email: blboheath@outlook.com
-Phone: 437.484.4883
-LinkedIn: linkedin.com/in/amerblboheath
-GitHub: github.com/amerblb
-Location: Toronto, ON, Canada
-    `;
-    
-    // Create and download the file
-    const blob = new Blob([resumeContent], { type: 'text/plain' });
-    const url = window.URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = 'Amer_Blboheath_Resume.txt';
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-    window.URL.revokeObjectURL(url);
-    
-    showToast('Resume downloaded!');
+    // For now, create a proper formatted HTML that can be printed as PDF
+    const resumeWindow = window.open('', '_blank');
+    resumeWindow.document.write(`
+        <!DOCTYPE html>
+        <html>
+        <head>
+            <title>Amer Blboheath - Resume</title>
+            <style>
+                body { font-family: Arial, sans-serif; margin: 40px; line-height: 1.6; }
+                h1 { color: #005F73; margin-bottom: 5px; }
+                h2 { color: #005F73; border-bottom: 2px solid #005F73; margin: 20px 0 10px 0; }
+                .contact-info { margin-bottom: 20px; }
+                ul { margin: 10px 0; padding-left: 25px; }
+                @media print { body { margin: 20px; } }
+            </style>
+        </head>
+        <body>
+            <h1>Amer Blboheath</h1>
+            <div class="contact-info">437.484.4883 | Blboheath@outlook.com | Toronto, ON | linkedin.com/in/amerblboheath</div>
+            
+            <h2>IT HELPDESK ANALYST – HEALTHCARE TECHNOLOGY SPECIALIST</h2>
+            
+            <h2>Summary of Qualifications</h2>
+            <p>Dynamic IT professional with 8+ years delivering exceptional technical support in enterprise environments, specializing in end-user support, onboarding/offboarding processes, and executive-level IT services. Proven expertise in Windows, MacOS, mobile device management, and ITSM platforms including ServiceNow. Passionate about leveraging technology to support healthcare transformation and helping organizations achieve operational excellence.</p>
+            
+            <h2>Technical Skills</h2>
+            <ul>
+                <li>Operating Systems: Windows 10/11, MacOS, Linux, iOS, Android</li>
+                <li>Microsoft Ecosystem: Office 365, Exchange Online, SharePoint, OneDrive, Teams, Intune, Active Directory</li>
+                <li>ITSM Platforms: ServiceNow, JIRA (ITIL-aligned processes)</li>
+                <li>Networking: TCP/IP, DNS, DHCP, VPN, Firewall configuration</li>
+                <li>Automation: PowerShell, Bash scripting, Python</li>
+                <li>AV/Conferencing: Zoom, Microsoft Teams, Crestron, AirMedia</li>
+                <li>MDM Solutions: Microsoft Intune, JAMF basics</li>
+            </ul>
+            
+            <h2>Education & Certifications</h2>
+            <p><strong>Google IT Support Professional Certificate</strong> | June 2024</p>
+            <p><strong>Career Essentials in Generative AI</strong> | June 2024</p>
+            <p><strong>Junior IT Analyst Program</strong> | NPower Canada | June 2024</p>
+            <p><strong>Bachelor of Arts in International Business Management</strong> | Asia Pacific University | April 2014</p>
+            
+            <h2>Work Experience</h2>
+            
+            <h3>IT Support Specialist</h3>
+            <p><strong>Accenture</strong> | November 2019 - November 2023</p>
+            <ul>
+                <li>Delivered comprehensive 1st and 2nd level technical support for 5,000+ enterprise users across Windows and MacOS environments, achieving 95% first-contact resolution rate</li>
+                <li>Managed end-to-end onboarding and offboarding procedures, including Active Directory account creation, Office 365 provisioning, and mobile device configuration</li>
+                <li>Implemented and maintained audio/video conferencing solutions (Teams, Zoom, Crestron) for executive meetings and corporate communications</li>
+                <li>Documented technical procedures and created knowledge base articles, reducing repeat incidents by 30%</li>
+                <li>Provided dedicated IT support for senior executives, prioritizing urgent requests and ensuring optimal system performance</li>
+                <li>Collaborated with Infrastructure and Cybersecurity teams to escalate and resolve complex technical issues</li>
+                <li>Performed system imaging, software deployments, and security updates across 500+ workstations</li>
+            </ul>
+            
+            <h3>Technical Support Analyst</h3>
+            <p><strong>Cognizant</strong> | October 2015 - October 2019</p>
+            <ul>
+                <li>Managed 300+ daily service requests through ServiceNow, maintaining SLAs and ITIL best practices</li>
+                <li>Supported diverse hardware including workstations, tablets, mobile phones, printers, and peripheral devices</li>
+                <li>Administered Office 365 user accounts and implemented MFA for enhanced security</li>
+                <li>Configured and troubleshot multifunctional printers and IP phone systems</li>
+                <li>Assisted with large-scale OS migrations and software rollouts, improving system efficiency by 20%</li>
+                <li>Provided after-hours on-call support on rotating schedule, ensuring business continuity</li>
+            </ul>
+            
+            <h3>Junior IT Systems Support</h3>
+            <p><strong>Marcusevans Group</strong> | August 2014 - September 2015</p>
+            <ul>
+                <li>Supported IT infrastructure with 99.5% uptime for enterprise applications</li>
+                <li>Created and managed user accounts in Active Directory for 5,000+ employees</li>
+                <li>Performed routine security patches, OS updates, and system backups</li>
+                <li>Documented IT processes and maintained technical documentation library</li>
+            </ul>
+            
+            <script>
+                window.onload = function() {
+                    window.print();
+                    window.onafterprint = function() {
+                        window.close();
+                    };
+                };
+            </script>
+        </body>
+        </html>
+    `);
+    showToast('Opening resume for print/save as PDF', 'info');
 }
 
 // Keyboard shortcuts
@@ -783,29 +935,88 @@ function initializeKeyboardShortcuts() {
                 navigateToSection(sections[sectionIndex]);
             }
         }
+        
+        // Escape key to close modals and go back
+        if (e.key === 'Escape') {
+            if (state.isCommandPaletteOpen) {
+                closeCommandPalette();
+            } else if (state.isMobileMenuOpen) {
+                closeMobileMenu();
+            } else {
+                // Check if we're in a detail view and go back
+                const portfolioDetail = document.getElementById('portfolio-detail');
+                const blogArticle = document.getElementById('blog-article');
+                
+                if (portfolioDetail && portfolioDetail.style.display !== 'none') {
+                    showPortfolioGrid();
+                } else if (blogArticle && blogArticle.style.display !== 'none') {
+                    showBlogList();
+                }
+            }
+        }
+        
+        // Tab navigation improvements
+        if (e.key === 'Tab') {
+            // Ensure focus is visible
+            document.body.classList.add('keyboard-navigation');
+        }
+    });
+    
+    // Remove keyboard navigation class on mouse use
+    document.addEventListener('mousedown', function() {
+        document.body.classList.remove('keyboard-navigation');
     });
 }
 
 // Portfolio management
 function loadPortfolio() {
-    const portfolioGrid = document.getElementById('portfolio-grid');
-    portfolioGrid.innerHTML = projects.map(project => `
-        <div class="portfolio-card" onclick="showProjectDetail('${project.id}')">
-            <h3>${project.title}</h3>
-            <p class="portfolio-summary">${project.summary}</p>
-            <div class="portfolio-tools">
-                ${project.tools.map(tool => `<span class="tool-badge">${tool}</span>`).join('')}
-            </div>
-            <div class="portfolio-tags">
-                ${project.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
-            </div>
-        </div>
-    `).join('');
+    try {
+        const portfolioGrid = document.getElementById('portfolio-grid');
+        if (!portfolioGrid) {
+            console.error('Portfolio grid element not found');
+            return;
+        }
+        
+        // Show loading state
+        portfolioGrid.innerHTML = '<div class="loading-state">Loading portfolio...</div>';
+        
+        // Simulate loading delay for better UX
+        setTimeout(() => {
+            portfolioGrid.innerHTML = projects.map((project, index) => `
+                <div class="portfolio-card" 
+                     onclick="showProjectDetail('${project.id}')" 
+                     onkeypress="if(event.key==='Enter') showProjectDetail('${project.id}')"
+                     tabindex="0"
+                     role="article"
+                     aria-label="${project.title}"
+                     style="animation-delay: ${index * 0.1}s">
+                    <h3>${project.title}</h3>
+                    <p class="portfolio-summary">${project.summary}</p>
+                    <div class="portfolio-tools">
+                        ${project.tools.map(tool => `<span class="tool-badge">${tool}</span>`).join('')}
+                    </div>
+                    <div class="portfolio-tags">
+                        ${project.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
+                    </div>
+                </div>
+            `).join('');
+        }, 100);
+    } catch (error) {
+        console.error('Error loading portfolio:', error);
+        const portfolioGrid = document.getElementById('portfolio-grid');
+        if (portfolioGrid) {
+            portfolioGrid.innerHTML = '<div class="error-state">Error loading portfolio. Please refresh the page.</div>';
+        }
+    }
 }
 
 function showProjectDetail(projectId) {
-    const project = projects.find(p => p.id === projectId);
-    if (!project) return;
+    try {
+        const project = projects.find(p => p.id === projectId);
+        if (!project) {
+            console.error('Project not found:', projectId);
+            return;
+        }
     
     const portfolioGrid = document.getElementById('portfolio-grid');
     const portfolioDetail = document.getElementById('portfolio-detail');
@@ -818,6 +1029,13 @@ function showProjectDetail(projectId) {
     document.addEventListener('keydown', escClosePortfolio, { once: true });
     
     portfolioDetailContent.innerHTML = `
+        <button class="back-button" onclick="showPortfolioGrid()" aria-label="Back to portfolio">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="19" y1="12" x2="5" y2="12"/>
+                <polyline points="12 19 5 12 12 5"/>
+            </svg>
+            Back to Portfolio
+        </button>
         <h2>${project.title}</h2>
         <p><strong>Role:</strong> ${project.role}</p>
         <p><strong>Summary:</strong> ${project.summary}</p>
@@ -847,10 +1065,27 @@ function showProjectDetail(projectId) {
         </ul>
         
         <div class="portfolio-links">
-            <a href="${project.links.github}" class="portfolio-link">GitHub</a>
-            <a href="${project.links.demo}" class="portfolio-link">Demo</a>
+            ${project.links.github !== '#' ? 
+                `<a href="${project.links.github}" class="portfolio-link" target="_blank" rel="noopener noreferrer">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>
+                    </svg>
+                    GitHub
+                </a>` : ''}
+            ${project.links.demo !== '#' ? 
+                `<a href="${project.links.demo}" class="portfolio-link" target="_blank" rel="noopener noreferrer">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/>
+                        <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/>
+                    </svg>
+                    Live Demo
+                </a>` : ''}
         </div>
     `;
+    } catch (error) {
+        console.error('Error showing project detail:', error);
+        showToast('Error loading project details', 'error');
+    }
 }
 
 function showPortfolioGrid() {
@@ -872,24 +1107,53 @@ function escClosePortfolio(e) {
 
 // Blog management
 function loadBlog() {
-    const blogList = document.getElementById('blog-list');
-    blogList.innerHTML = posts.map(post => `
-        <div class="blog-card" onclick="showBlogArticle('${post.slug}')">
-            <h3>${post.title}</h3>
-            <div class="blog-meta">
-                <span>${formatDate(post.date)}</span>
-                <span>${post.readMinutes} min read</span>
-            </div>
-            <div class="blog-tags">
-                ${post.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
-            </div>
-        </div>
-    `).join('');
+    try {
+        const blogList = document.getElementById('blog-list');
+        if (!blogList) {
+            console.error('Blog list element not found');
+            return;
+        }
+        
+        // Show loading state
+        blogList.innerHTML = '<div class="loading-state">Loading blog posts...</div>';
+        
+        // Simulate loading delay for better UX
+        setTimeout(() => {
+            blogList.innerHTML = posts.map((post, index) => `
+                <div class="blog-card" 
+                     onclick="showBlogArticle('${post.slug}')" 
+                     onkeypress="if(event.key==='Enter') showBlogArticle('${post.slug}')"
+                     tabindex="0"
+                     role="article"
+                     aria-label="${post.title}"
+                     style="animation-delay: ${index * 0.1}s">
+                    <h3>${post.title}</h3>
+                    <div class="blog-meta">
+                        <span>${formatDate(post.date)}</span>
+                        <span>${post.readMinutes} min read</span>
+                    </div>
+                    <div class="blog-tags">
+                        ${post.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
+                    </div>
+                </div>
+            `).join('');
+        }, 100);
+    } catch (error) {
+        console.error('Error loading blog:', error);
+        const blogList = document.getElementById('blog-list');
+        if (blogList) {
+            blogList.innerHTML = '<div class="error-state">Error loading blog posts. Please refresh the page.</div>';
+        }
+    }
 }
 
 function showBlogArticle(slug) {
-    const post = posts.find(p => p.slug === slug);
-    if (!post) return;
+    try {
+        const post = posts.find(p => p.slug === slug);
+        if (!post) {
+            console.error('Blog post not found:', slug);
+            return;
+        }
     
     const blogList = document.getElementById('blog-list');
     const blogArticle = document.getElementById('blog-article');
@@ -902,6 +1166,13 @@ function showBlogArticle(slug) {
     document.addEventListener('keydown', escCloseBlog, { once: true });
     
     blogArticleContent.innerHTML = `
+        <button class="back-button" onclick="showBlogList()" aria-label="Back to blog">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="19" y1="12" x2="5" y2="12"/>
+                <polyline points="12 19 5 12 12 5"/>
+            </svg>
+            Back to Blog
+        </button>
         <div class="article-header">
             <h1 class="article-title">${post.title}</h1>
             <div class="article-meta">
@@ -915,6 +1186,10 @@ function showBlogArticle(slug) {
             ${renderArticleBody(post.body)}
         </div>
     `;
+    } catch (error) {
+        console.error('Error showing blog article:', error);
+        showToast('Error loading blog article', 'error');
+    }
 }
 
 function showBlogList() {
